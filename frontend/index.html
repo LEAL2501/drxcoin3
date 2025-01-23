@@ -7,7 +7,29 @@
 </head>
 <body>
     <h1>DRXCoin Blockchain</h1>
-    <button id="fetchBlocks">Fetch Blocks</button>
+
+    <h2>Criar Transação</h2>
+    <form id="transactionForm">
+        <input type="text" id="from" placeholder="De (endereço)" required />
+        <input type="text" id="to" placeholder="Para (endereço)" required />
+        <input type="number" id="amount" placeholder="Quantia" required />
+        <button type="submit">Criar Transação</button>
+    </form>
+
+    <h2>Minerar</h2>
+    <form id="mineForm">
+        <input type="text" id="minerAddress" placeholder="Endereço do Minerador" required />
+        <button type="submit">Minerar Bloco</button>
+    </form>
+
+    <h2>Consultar Saldo</h2>
+    <form id="balanceForm">
+        <input type="text" id="address" placeholder="Endereço" required />
+        <button type="submit">Consultar Saldo</button>
+    </form>
+
+    <h2>Blocos</h2>
+    <button id="fetchBlocks">Carregar Blocos</button>
     <ul id="blockchain"></ul>
 
     <script src="script.js"></script>
