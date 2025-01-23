@@ -1,3 +1,6 @@
+// URL do backend hospedado no Render (substitua com a URL real)
+const backendUrl = "https://drxcoin3.onrender.com"; // Substitua pela URL real
+
 // Criar Transação
 document.getElementById('transactionForm').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -5,7 +8,7 @@ document.getElementById('transactionForm').addEventListener('submit', async (e) 
     const to = document.getElementById('to').value;
     const amount = document.getElementById('amount').value;
 
-    const response = await fetch('http://localhost:3000/transaction', {
+    const response = await fetch(`${backendUrl}/transacao`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ from, to, amount }),
@@ -20,7 +23,7 @@ document.getElementById('mineForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const minerAddress = document.getElementById('minerAddress').value;
 
-    const response = await fetch('http://localhost:3000/mine', {
+    const response = await fetch(`${backendUrl}/mine`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ minerAddress }),
@@ -35,21 +38,21 @@ document.getElementById('balanceForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const address = document.getElementById('address').value;
 
-    const response = await fetch(`http://localhost:3000/balance/${address}`);
+    const response = await fetch(`${backendUrl}/balance/${address}`);
     const data = await response.json();
     alert(`Saldo: ${data.balance}`);
 });
 
 // Carregar Blocos
 document.getElementById('fetchBlocks').addEventListener('click', async () => {
-    const response = await fetch('http://localhost:3000/blocks');
+    const response = await fetch(`${backendUrl}/blocks`);
     const blocks = await response.json();
 
     const list = document.getElementById('blockchain');
     list.innerHTML = '';
     blocks.forEach(block => {
         const listItem = document.createElement('li');
-        listItem.textContent = `Index: ${block.index}, Hash: ${block.hash}, Data: ${JSON.stringify(block.data)}`;
+        listItem.textContent = `Index: ${block.index}, Hash: ${block.hash}`;
         list.appendChild(listItem);
     });
 });
