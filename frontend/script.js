@@ -1,6 +1,3 @@
-// URL do backend hospedado no Render (substitua com a URL real)
-const backendUrl = "https://drxcoin3.onrender.com"; // Substitua pela URL real
-
 // Criar Transação
 document.getElementById('transactionForm').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -8,7 +5,8 @@ document.getElementById('transactionForm').addEventListener('submit', async (e) 
     const to = document.getElementById('to').value;
     const amount = document.getElementById('amount').value;
 
-    const response = await fetch(`${backendUrl}/transacao`, {
+    // Enviar a transação para o backend
+    const response = await fetch('https://drxcoin3.onrender.com/transaction', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ from, to, amount }),
@@ -23,7 +21,8 @@ document.getElementById('mineForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const minerAddress = document.getElementById('minerAddress').value;
 
-    const response = await fetch(`${backendUrl}/mine`, {
+    // Enviar a requisição para minerar o bloco
+    const response = await fetch('https://drxcoin3.onrender.com/mine', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ minerAddress }),
@@ -38,18 +37,22 @@ document.getElementById('balanceForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const address = document.getElementById('address').value;
 
-    const response = await fetch(`${backendUrl}/balance/${address}`);
+    // Consultar o saldo do endereço
+    const response = await fetch(`https://drxcoin3.onrender.com/balance/${address}`);
     const data = await response.json();
     alert(`Saldo: ${data.balance}`);
 });
 
 // Carregar Blocos
 document.getElementById('fetchBlocks').addEventListener('click', async () => {
-    const response = await fetch(`${backendUrl}/blocks`);
+    // Carregar todos os blocos
+    const response = await fetch('https://drxcoin3.onrender.com/blocks');
     const blocks = await response.json();
 
     const list = document.getElementById('blockchain');
-    list.innerHTML = '';
+    list.innerHTML = '';  // Limpa a lista de blocos antes de adicionar novos
+
+    // Exibir os blocos na página
     blocks.forEach(block => {
         const listItem = document.createElement('li');
         listItem.textContent = `Index: ${block.index}, Hash: ${block.hash}`;
